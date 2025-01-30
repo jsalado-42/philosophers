@@ -6,11 +6,11 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 14:18:34 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/01/30 15:30:36 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:56:29 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../include/philosophers.h"
 
 int	main()
 {
