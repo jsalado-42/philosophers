@@ -1,10 +1,11 @@
 NAME=philosophers
 
 CC=cc
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -fsanitize=address
 RM=rm -f
 
-SRC_PATH=./src
+SRC_PATH=./src/
+UTIL_PATH=$(SRC_PATH)utils/
 OBJ_PATH=./objs/
 LIB_PATH=./include/
 
@@ -15,6 +16,9 @@ LFT_LIB=$(LFT_DIR)/$(LFT).a
 INCS=-I$(LFT_DIR)
 
 FILES=main.c
+UTILS=print.c
+MAIN_FILES=$(addprefix $(SRC_PATH), $(FILES)) 
+UTIL_FILES=$(addprefix $(UTIL_PATH), $(UTILS)) 
 SRC_FILES=$(addprefix $(SRC_PATH), $(FILES)) 
 
 OBJ=$(FILES:.c=.o)
@@ -46,9 +50,9 @@ re: fclean all
 
 # --- INTERNAL TOOLS --- #
 
-debug: fclean
+debug: fclean $(OBJ_PATH) $(LFT_LIB) $(NAME)
 	@make libft-re
-	@$(CC) -g $(CFLAGS) $(FILES) -o $(NAME) $(LIBFT-DIR)/libft.a
+	@g$(CC) -g $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(LFT_LIB) $(INCS)
 	@echo "$(DETAIL)- Debug program ready -"
 
 info:
