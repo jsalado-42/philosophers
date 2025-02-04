@@ -23,18 +23,21 @@
 # include <sys/time.h>
 # include "./libft/libft.h"
 
+# define SIM_NOT_INIT "The simulation could not be initialized"
+# define FORK_TAKEN "has taken a fork"
+
 typedef struct s_details {
-	int				number_of_philosophers;
+	int				philo_nb;
 	
 	time_t			time_to_die;
 	int				died;
 
-	time_t			time_to_eat;
+	time_t			t_eat;
 	int				eating;
 
 	time_t			time_to_sleep;
 	
-	time_t			time_to_think;
+	time_t			t_think;
 	int				finish;
 	
 	time_t			t_start;
@@ -50,7 +53,7 @@ typedef struct s_philosopher
 	
 	pthread_mutex_t	*fork;
 	t_details		*details;
-} t_philosopher;
+} t_philo;
 
 
 typedef enum e_mutexes
@@ -62,6 +65,39 @@ typedef enum e_mutexes
 	M_NUM
 }					t_mutexes;
 
-// void	asdprint(char *str);
+// Actions
+int		take_fork(char s, int a, int b);
+int		ft_eating(t_philo *philosopher);
+int		ph_died(t_philo *philosopher, int n);
+int		ft_philosopher_finished(t_philo *philosopher, int n);
+void	ft_finish_eating(t_philo *philosopher);
+
+// Checker
+int		ft_isdigitstr(char *str);
+int		ft_check_args(int ac, char **av);
+int		ft_are_done(t_philo *number_of_philosophers, t_details *details);
+void	ft_check_stop_routine(t_philo *philosophers, t_details *details);
+
+// Free
+void	destroy_mutexes(t_philo *number_of_philosophers, t_details *details);
+void	ft_kill_philos(t_philo *number_of_philosophers, t_details *details);
+
+// Init
+int	ft_init_details_mutexes(t_details **details);
+int	ft_init_details(t_details **details, int ac, char **av);
+int	ft_init_philo(t_philo **number_of_philosophers, t_details *details);
+int	ft_init_program(t_philo **number_of_philosophers, t_details **details, int ac, char **av);
+
+// Philosopher
+void	*ft_philo_routine(void *args);
+
+// Printer
+int		print_usage(void);
+int		ft_error(char *str);
+void	ft_print_philosopher(t_philo *philosopher, char *str);
+
+// Time
+time_t	get_time(void);
+void	ft_sleep(time_t ms);
 
 #endif

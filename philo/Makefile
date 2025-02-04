@@ -1,7 +1,7 @@
 NAME=philosophers
 
 CC=cc
-CFLAGS=-Wall -Wextra -Werror -fsanitize=address
+CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g3
 RM=rm -f
 
 SRC_PATH=./src/
@@ -15,10 +15,7 @@ LFT_LIB=$(LFT_DIR)/$(LFT).a
 
 INCS=-I$(LFT_DIR)
 
-FILES=main.c
-UTILS=print.c
-MAIN_FILES=$(addprefix $(SRC_PATH), $(FILES)) 
-UTIL_FILES=$(addprefix $(UTIL_PATH), $(UTILS)) 
+FILES=main.c actions.c checker.c free.c init.c philosopher.c printer.c time.c
 SRC_FILES=$(addprefix $(SRC_PATH), $(FILES)) 
 
 OBJ=$(FILES:.c=.o)
