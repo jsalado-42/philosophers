@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   lib_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 14:28:32 by jsalado-          #+#    #+#             */
-/*   Updated: 2024/12/11 11:14:54 by jsalado-         ###   ########.fr       */
+/*   Created: 2025/02/05 11:56:29 by jsalado-          #+#    #+#             */
+/*   Updated: 2025/02/05 11:59:53 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/philosophers.h"
+
+static int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
 static int	ft_isspace(char c)
 {
@@ -43,4 +50,15 @@ int	ft_atoi(const char *str)
 		counter++;
 	}
 	return (result * is_positive);
+}
+
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

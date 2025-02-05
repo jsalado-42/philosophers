@@ -6,7 +6,7 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:38:05 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/05 11:39:50 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:00:05 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,18 @@
 # include <pthread.h>
 # include <time.h>
 # include <sys/time.h>
-# include "./libft/libft.h"
 
+// Simulation messages
+# define INVALID_ARGUMENTS "Invalid arguments"
+# define INVALID_NUMBER_TYPE "Invalid number type"
 # define SIM_NOT_INIT "The simulation could not be initialized"
-# define FORK_TAKEN "has taken a fork"
+
+// Philosopher action messages
+# define HAS_TAKEN_FORK "has taken a fork"
+# define IS_EATING "is eating"
+# define IS_THINKING "is thinking"
+# define IS_SLEEPING "is sleeping"
+# define DIED "died"
 
 typedef struct s_details
 {
@@ -87,6 +95,10 @@ int		ft_init_details_mutexes(t_details **details);
 int		ft_init_details(t_details **details, int ac, char **av);
 int		ft_init_philo(t_philo **number_of_philosophers, t_details *details);
 int		ft_init_program(t_philo **n_philo, t_details **dt, int ac, char **av);
+
+// Lib utils
+int		ft_atoi(const char *str);
+int		ft_strcmp(const char *s1, const char *s2);
 
 // Philosopher
 void	*ft_philo_routine(void *args);

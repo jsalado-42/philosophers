@@ -9,13 +9,17 @@ UTIL_PATH=$(SRC_PATH)utils/
 OBJ_PATH=./objs/
 LIB_PATH=./include/
 
-LFT=libft
-LFT_DIR=$(LIB_PATH)$(LFT)
-LFT_LIB=$(LFT_DIR)/$(LFT).a
+FILES=	main.c \
+		actions.c \
+		time.c \
+		checker.c \
+		free.c \
+		init.c \
+		lib_utils.c \
+		philosopher.c \
+		printer.c \
+		status.c \
 
-INCS=-I$(LFT_DIR)
-
-FILES=main.c actions.c checker.c free.c init.c philosopher.c printer.c time.c
 SRC_FILES=$(addprefix $(SRC_PATH), $(FILES)) 
 
 OBJ=$(FILES:.c=.o)
@@ -23,10 +27,10 @@ OBJ_FILES=$(addprefix $(OBJ_PATH), $(OBJ))
 
 # --- RULES --- #
 
-all: $(OBJ_PATH) $(LFT_LIB) $(NAME)
+all: $(OBJ_PATH) $(NAME)
 
 $(NAME): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(LFT_LIB) $(INCS)
+	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(INCS)
 	@echo "Program '$(NAME)' compiled."
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
@@ -35,11 +39,11 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
 
-clean: libft-clean
+clean:
 	@rm -f $(OBJ_PATH)*.o
 	@echo "Objects deleted."
 
-fclean: libft-fclean clean
+fclean: clean
 	@rm -f $(NAME)
 	@echo "Program deleted."
 
@@ -47,9 +51,9 @@ re: fclean all
 
 # --- INTERNAL TOOLS --- #
 
-debug: fclean $(OBJ_PATH) $(LFT_LIB) $(NAME)
+debug: fclean $(OBJ_PATH) $(NAME)
 	@make libft-re
-	@g$(CC) -g $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(LFT_LIB) $(INCS)
+	@g$(CC) -g $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(INCS)
 	@echo "$(DETAIL)- Debug program ready -"
 
 info:
@@ -58,33 +62,6 @@ info:
 	@echo "$(ERROR)Error."
 	@echo "$(INFO)This message is info only."
 	@echo "$(DETAIL)Use it to clarify the process."
-
-# --- LIBFT --- #
-
-$(LFT_LIB):
-	@make all -C $(LFT_DIR)
-
-libft-re: libft-fclean libft-all
-	@make re -C $(LFT_DIR)
-
-libft-clean:
-	@make clean -C $(LFT_DIR)
-	@echo "Libft deleted."
-
-libft-fclean:
-	@make fclean -C $(LFT_DIR)
-
-libft-all:
-	@make all -C $(LFT_DIR)
-
-libft-c:
-	@make clean -C $(LIBFT-DIR)
-
-libft-fc:
-	@make fclean -C $(LIBFT-DIR)
-
-libft-re:
-	@make re -C $(LIBFT-DIR)
 
 # --- OTHER THINGS --- #
 

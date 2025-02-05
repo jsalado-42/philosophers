@@ -6,7 +6,7 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:13:57 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/04 15:33:56 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:48:39 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_check_stop_routine(t_philo *philosophers, t_details *details)
 		if (last_meal && get_time() - last_meal > details->time_to_die)
 		{
 			ph_died(philosophers, 1);
-			ft_print_philosopher(&philosophers[i], "died");
+			ft_print_philosopher(&philosophers[i], DIED);
 			break ;
 		}
 		i = (i + 1) % details->philo_nb;
@@ -80,15 +80,15 @@ int	ft_are_done(t_philo *number_of_philosophers, t_details *details)
 int	ft_check_args(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
-		return (ft_error("Invalid arguments"));
+		return (ft_error(INVALID_ARGUMENTS));
 	if ((ac == 6 && ft_atoi(av[5]) == 0) || ft_atoi(av[1]) == 0)
 		return (1);
 	while (ac-- > 1)
 	{
 		if (!ft_isdigitstr(av[ac]))
-			return (ft_error("Invalid number type"));
+			return (ft_error(INVALID_NUMBER_TYPE));
 		if (ft_atoi(av[ac]) < 0 || ft_atoi(av[ac]) > INT_MAX)
-			return (ft_error("Invalid number type"));
+			return (ft_error(INVALID_NUMBER_TYPE));
 	}
 	return (0);
 }
