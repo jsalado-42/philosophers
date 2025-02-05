@@ -49,6 +49,16 @@ fclean: clean
 
 re: fclean all
 
+.PHONY: all clean fclean re
+
+# --- RUN --- #
+
+run-inf:
+	./philosophers 2 800 200 200
+
+run-ko:
+	./philosophers 3 300 200 200
+
 # --- INTERNAL TOOLS --- #
 
 debug: fclean $(OBJ_PATH) $(NAME)
