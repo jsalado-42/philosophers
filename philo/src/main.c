@@ -6,7 +6,7 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 14:18:34 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/04 15:35:59 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:40:02 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,17 @@ int	main(int ac, char **av)
 	if (ft_check_args(ac, av))
 		return (EXIT_FAILURE);
 	if (ft_init_program(&philo_nb, &details, ac, av))
-		return (ft_kill_philos(philo_nb, details), ft_error(SIM_NOT_INIT), 1);
+	{
+		ft_kill_philos(philo_nb, details);
+		ft_error(SIM_NOT_INIT);
+		return (1);
+	}
 	if (ft_simulation(philo_nb, details))
-		return (ft_kill_philos(philo_nb, details), ft_error(SIM_NOT_INIT), 1);
+	{
+		ft_kill_philos(philo_nb, details);
+		ft_error(SIM_NOT_INIT);
+		return (1);
+	}
 	ft_kill_philos(philo_nb, details);
 	return (0);
 }

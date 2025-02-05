@@ -6,7 +6,7 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:13:25 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/04 15:33:25 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:30:38 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_print_philosopher(t_philo *ph, char *str)
 	{
 		ft_printf("Philosopher %2i %s at %4li", ph_id, str, time);
 	}
-	if (!ph_died(ph, 0) && !ft_philosopher_finished(ph, 0))
+	if (!ph_died(ph, 0) && ft_philosopher_finished(ph, 0))
 	{
 		if (ft_strcmp(str, "has taken the fork") == 0 && time > 9999)
 			printf("At %04li, philosopher %.2i %s\n", time, ph_id, str);
