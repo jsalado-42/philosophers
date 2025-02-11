@@ -6,7 +6,7 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:13:57 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/05 11:48:39 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:45:14 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_isdigitstr(char *str)
 	return (0);
 }
 
-void	ft_check_stop_routine(t_philo *philosophers, t_details *details)
+void	ft_check_stop_routine(t_philo *philos, t_details *details)
 {
 	int		i;
 	time_t	last_meal;
@@ -35,17 +35,17 @@ void	ft_check_stop_routine(t_philo *philosophers, t_details *details)
 	while (1)
 	{
 		pthread_mutex_lock(&details->mutex[M_EATING]);
-		last_meal = philosophers[i].last_meal;
+		last_meal = philos[i].last_meal;
 		pthread_mutex_unlock(&details->mutex[M_EATING]);
-		if (last_meal && ft_are_done(philosophers, details))
+		if (last_meal && ft_are_done(philos, details))
 		{
-			ft_philosopher_finished(philosophers, 1);
+			ft_philosopher_finished(philos, 1);
 			break ;
 		}
 		if (last_meal && get_time() - last_meal > details->time_to_die)
 		{
-			ph_died(philosophers, 1);
-			ft_print_philosopher(&philosophers[i], DIED);
+			ph_died(philos, 1);
+			ft_print_philosopher(&philos[i], DIED);
 			break ;
 		}
 		i = (i + 1) % details->philo_nb;
@@ -54,22 +54,22 @@ void	ft_check_stop_routine(t_philo *philosophers, t_details *details)
 	return ;
 }
 
-int	ft_are_done(t_philo *number_of_philosophers, t_details *details)
+int	ft_are_done(t_philo *philos, t_details *details)
 {
 	int	i;
 	int	done;
 	int	time_ate;
 
-	if (details->eating == -1)
+	if (details->t_eat == -1)
 		return (0);
 	i = -1;
 	done = -1;
 	while (++i < details->philo_nb)
 	{
-		pthread_mutex_lock(&number_of_philosophers->details->mutex[M_EATING]);
-		time_ate = number_of_philosophers[i].time_ate;
-		pthread_mutex_unlock(&number_of_philosophers->details->mutex[M_EATING]);
-		if (time_ate >= details->eating)
+		pthread_mutex_lock(&philos->details->mutex[M_EATING]);
+		time_ate = philos[i].time_ate;
+		pthread_mutex_unlock(&philos->details->mutex[M_EATING]);
+		if (time_ate >= details->t_eat)
 			if (++done == details->philo_nb - 1)
 				return (1);
 		usleep(50);

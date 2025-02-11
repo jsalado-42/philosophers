@@ -6,7 +6,7 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:15:53 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/04 15:34:55 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:45:14 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,27 @@ int	ft_init_details_mutexes(t_details **details)
 	return (0);
 }
 
-int	ft_init_details(t_details **details, int ac, char **av)
+int	ft_init_details(t_details **dt, int ac, char **av)
 {
-	(*details)->philo_nb = ft_atoi(av[1]);
-	(*details)->time_to_die = ft_atoi(av[2]);
-	(*details)->t_eat = ft_atoi(av[3]);
-	(*details)->t_think = ft_atoi(av[4]);
-	(*details)->eating = 0;
+	(*dt)->philo_nb = ft_atoi(av[1]);
+	(*dt)->time_to_die = ft_atoi(av[2]);
+	(*dt)->t_eat = ft_atoi(av[3]);
+	(*dt)->t_think = ft_atoi(av[4]);
+	(*dt)->t_eat = -1;
 	if (ac == 6)
-		(*details)->eating = ft_atoi(av[5]);
-	(*details)->t_start = get_time();
-	(*details)->t_think = 0;
-	if (((*details)->philo_nb % 2 == 0)
-		&& (*details)->t_eat > (*details)->t_think)
-		(*details)->t_think = (*details)->t_eat - (*details)->t_think;
-	(*details)->finish = 0;
-	(*details)->died = 0;
-	if (ft_init_details_mutexes(details))
+		(*dt)->t_eat = ft_atoi(av[5]);
+	(*dt)->t_start = get_time();
+	(*dt)->t_think = 0;
+	if (((*dt)->philo_nb % 2 == 0) && (*dt)->t_eat > (*dt)->t_sleep)
+		(*dt)->t_think = (*dt)->t_eat - (*dt)->t_sleep;
+	(*dt)->finish = 0;
+	(*dt)->died = 0;
+	if (ft_init_details_mutexes(dt))
 		return (1);
 	return (0);
 }
 
-int	ft_init_philo(t_philo **number_of_philosophers, t_details *details)
+int	ft_init_philo(t_philo **philos, t_details *details)
 {
 	pthread_mutex_t	*fork;
 	int				i;
@@ -60,13 +59,13 @@ int	ft_init_philo(t_philo **number_of_philosophers, t_details *details)
 	i = -1;
 	while (++i < details->philo_nb)
 	{
-		(*number_of_philosophers)[i].id = i;
-		(*number_of_philosophers)[i].last_meal = details->t_start;
-		(*number_of_philosophers)[i].time_ate = 0;
-		(*number_of_philosophers)[i].f[0] = i;
-		(*number_of_philosophers)[i].f[1] = (i + 1) % details->philo_nb;
-		(*number_of_philosophers)[i].fork = fork;
-		(*number_of_philosophers)[i].details = details;
+		(*philos)[i].id = i;
+		(*philos)[i].last_meal = details->t_start;
+		(*philos)[i].time_ate = 0;
+		(*philos)[i].f[0] = i;
+		(*philos)[i].f[1] = (i + 1) % details->philo_nb;
+		(*philos)[i].fork = fork;
+		(*philos)[i].details = details;
 	}
 	return (0);
 }

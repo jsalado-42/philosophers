@@ -6,20 +6,20 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:38:05 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/05 12:00:05 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:00:46 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
+# include <time.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
 # include <pthread.h>
-# include <time.h>
 # include <sys/time.h>
 
 // Simulation messages
@@ -42,9 +42,9 @@ typedef struct s_details
 	int				died;
 
 	time_t			t_eat;
-	int				eating;
+	int				has_to_eat;
 
-	time_t			time_to_sleep;
+	time_t			t_sleep;
 
 	time_t			t_think;
 	int				finish;
@@ -101,7 +101,7 @@ int		ft_atoi(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 
 // Philosopher
-void	*ft_philo_routine(void *args);
+void	*ft_routine(void *args);
 
 // Printer
 int		print_usage(void);

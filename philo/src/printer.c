@@ -6,7 +6,7 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:13:25 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/05 11:57:31 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:36:41 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ void	ft_print_philosopher(t_philo *ph, char *str)
 	ph_id = ph->id + 1;
 	time = get_time() - ph->details->t_start;
 	pthread_mutex_lock(&ph->details->mutex[M_PRINT]);
-	if (ft_strcmp(str, "died") == 0)
-	{
+	if (ft_strcmp(str, DIED) == 0)
 		printf("Philosopher %2i %s at %4li", ph_id, str, time);
-	}
-	if (!ph_died(ph, 0) && ft_philosopher_finished(ph, 0))
+	if (!ph_died(ph, 0) && !ft_philosopher_finished(ph, 0))
 	{
-		if (ft_strcmp(str, HAS_TAKEN_FORK) == 0 && time > ph->details->t_eat)
+		if (ft_strcmp(str, HAS_TAKEN_FORK) == 0 && time > 9999)
 			printf("At %.4li, philosopher %.2i %s\n", time, ph_id, str);
 		else if (ft_strcmp(str, HAS_TAKEN_FORK) == 0)
 			printf("At %.4li, philosopher %.2i %s\n", time, ph_id, str);

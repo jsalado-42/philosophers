@@ -6,13 +6,13 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:15:10 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/05 11:49:46 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:37:42 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-void	*ft_philo_routine(void *args)
+void	*ft_routine(void *args)
 {
 	t_philo	*philosophers;
 

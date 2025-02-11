@@ -6,7 +6,7 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:50:39 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/05 11:51:10 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:45:58 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_eating(t_philo *ph)
 	pthread_mutex_unlock(&ph->details->mutex[M_EATING]);
 	if (ft_philosopher_finished(ph, 0))
 		return (ft_finish_eating(ph), 1);
-	ft_sleep(ph->details->eating);
+	ft_sleep(ph->details->t_sleep);
 	ft_finish_eating(ph);
 	return (0);
 }

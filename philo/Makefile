@@ -53,10 +53,10 @@ re: fclean all
 
 # --- RUN --- #
 
-run-inf:
+run-inf: re
 	./philosophers 2 800 200 200
 
-run-ko:
+run-ko: re
 	./philosophers 3 300 200 200
 
 # --- INTERNAL TOOLS --- #

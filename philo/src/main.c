@@ -6,7 +6,7 @@
 /*   By: jsalado- <jsalado-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 14:18:34 by jsalado-          #+#    #+#             */
-/*   Updated: 2025/02/05 11:40:02 by jsalado-         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:53:38 by jsalado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_simulation(t_philo *philos, t_details *details)
 	i = -1;
 	while (++i < details->philo_nb)
 	{
-		if (pthread_create(&thread[i], NULL, ft_philo_routine, &philos[i]))
+		if (pthread_create(&thread[i], NULL, ft_routine, &philos[i]))
 		{
 			while (i--)
 				pthread_join(thread[i], NULL);
