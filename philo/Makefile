@@ -1,24 +1,19 @@
-NAME=philosophers
+NAME=philo
 
 CC=cc
-CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS=-Wall -Wextra -Werror -pthread -fsanitize=address -g3
 RM=rm -f
 
 SRC_PATH=./src/
-UTIL_PATH=$(SRC_PATH)utils/
 OBJ_PATH=./objs/
 LIB_PATH=./include/
 
 FILES=	main.c \
 		actions.c \
-		time.c \
 		checker.c \
-		free.c \
-		init.c \
-		lib_utils.c \
 		philosopher.c \
-		printer.c \
-		status.c \
+		utils.c \
+		wait.c
 
 SRC_FILES=$(addprefix $(SRC_PATH), $(FILES)) 
 
@@ -54,16 +49,16 @@ re: fclean all
 # --- RUN --- #
 
 run-inf: re
-	./philosophers 2 800 200 200
+	./$(NAME) 2 800 200 200
 
 run-ko: re
-	./philosophers 3 300 200 200
+	./$(NAME) 3 300 200 200
 
 # --- INTERNAL TOOLS --- #
 
 debug: fclean $(OBJ_PATH) $(NAME)
 	@make libft-re
-	@g$(CC) -g $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(INCS)
+	@g$(CC) -g $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(INCS) 
 	@echo "$(DETAIL)- Debug program ready -"
 
 info:

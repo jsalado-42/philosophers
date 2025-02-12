@@ -1,2 +1,4 @@
 philo/objs/*
+philo-dep/*
 *.o
+philo
